@@ -1,6 +1,7 @@
 package com.example.Quiz2corte.model;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.sql.Time;
 import java.util.Date;
@@ -8,28 +9,31 @@ import java.util.List;
 
 @Entity
 public class Propietario {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idPropietario;
+    private Long idPropietario;
 
     private String nombre;
     private String cedula;
     private Date fechaVisita;
     private Time horaEntrada;
 
-    @OneToMany(mappedBy = "propietario")
+    @JsonManagedReference
+    @OneToMany(mappedBy = "propietario", fetch = FetchType.LAZY)
     private List<Visitante> visitantes;
 
-    @OneToMany(mappedBy = "propietario")
+    @OneToMany(mappedBy = "propietario", cascade = CascadeType.ALL)
     private List<ReservaZona> reservasZona;
 
-    @OneToMany(mappedBy = "propietario")
+    @OneToMany(mappedBy = "propietario", cascade = CascadeType.ALL)
     private List<ReservaParqueadero> reservasParqueadero;
 
     public Propietario() {
     }
 
-    public Propietario(Integer idPropietario, String nombre, String cedula, Date fechaVisita, Time horaEntrada, List<Visitante> visitantes, List<ReservaZona> reservasZona, List<ReservaParqueadero> reservasParqueadero) {
+    public Propietario(Long idPropietario, String nombre, String cedula, Date fechaVisita, Time horaEntrada,
+                       List<Visitante> visitantes, List<ReservaZona> reservasZona, List<ReservaParqueadero> reservasParqueadero) {
         this.idPropietario = idPropietario;
         this.nombre = nombre;
         this.cedula = cedula;
@@ -40,11 +44,11 @@ public class Propietario {
         this.reservasParqueadero = reservasParqueadero;
     }
 
-    public Integer getIdPropietario() {
+    public Long getIdPropietario() {
         return idPropietario;
     }
 
-    public void setIdPropietario(Integer idPropietario) {
+    public void setIdPropietario(Long idPropietario) {
         this.idPropietario = idPropietario;
     }
 

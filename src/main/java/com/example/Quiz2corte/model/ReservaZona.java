@@ -1,19 +1,18 @@
 package com.example.Quiz2corte.model;
 
 import jakarta.persistence.*;
-import jakarta.persistence.Entity;
-
-import java.sql.Time;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 public class ReservaZona {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idReserva;
+    private Long idReserva;
 
-    private Date fecha;
-    private Time horaInicio;
+    private LocalDate fecha;
+    private LocalTime horaInicio;
 
     @ManyToOne
     @JoinColumn(name = "id_zona")
@@ -26,7 +25,7 @@ public class ReservaZona {
     public ReservaZona() {
     }
 
-    public ReservaZona(Integer idReserva, Date fecha, Time horaInicio, ZonaSocial zona, Propietario propietario) {
+    public ReservaZona(Long idReserva, LocalDate fecha, LocalTime horaInicio, ZonaSocial zona, Propietario propietario) {
         this.idReserva = idReserva;
         this.fecha = fecha;
         this.horaInicio = horaInicio;
@@ -34,27 +33,27 @@ public class ReservaZona {
         this.propietario = propietario;
     }
 
-    public Integer getIdReserva() {
+    public Long getIdReserva() {
         return idReserva;
     }
 
-    public void setIdReserva(Integer idReserva) {
+    public void setIdReserva(Long idReserva) {
         this.idReserva = idReserva;
     }
 
-    public Date getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 
-    public Time getHoraInicio() {
+    public LocalTime getHoraInicio() {
         return horaInicio;
     }
 
-    public void setHoraInicio(Time horaInicio) {
+    public void setHoraInicio(LocalTime horaInicio) {
         this.horaInicio = horaInicio;
     }
 
@@ -85,6 +84,3 @@ public class ReservaZona {
                 '}';
     }
 }
-
-
-

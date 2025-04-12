@@ -1,38 +1,34 @@
 package com.example.Quiz2corte.model;
 
 import jakarta.persistence.*;
-
 import java.util.List;
 
 @Entity
 public class ZonaSocial {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idZona;
+    private Long idZona;
 
     private String nombre;
-    private String ubicacion;
-    private Integer capacidad;
 
-    @OneToMany(mappedBy = "zona")
-    private List<ReservaZona> reservas;
+    @OneToMany(mappedBy = "zona", cascade = CascadeType.ALL)
+    private List<ReservaZona> reservasZona;
 
     public ZonaSocial() {
     }
 
-    public ZonaSocial(Integer idZona, String nombre, String ubicacion, Integer capacidad, List<ReservaZona> reservas) {
+    public ZonaSocial(Long idZona, String nombre, List<ReservaZona> reservasZona) {
         this.idZona = idZona;
         this.nombre = nombre;
-        this.ubicacion = ubicacion;
-        this.capacidad = capacidad;
-        this.reservas = reservas;
+        this.reservasZona = reservasZona;
     }
 
-    public Integer getIdZona() {
+    public Long getIdZona() {
         return idZona;
     }
 
-    public void setIdZona(Integer idZona) {
+    public void setIdZona(Long idZona) {
         this.idZona = idZona;
     }
 
@@ -44,28 +40,12 @@ public class ZonaSocial {
         this.nombre = nombre;
     }
 
-    public String getUbicacion() {
-        return ubicacion;
+    public List<ReservaZona> getReservasZona() {
+        return reservasZona;
     }
 
-    public void setUbicacion(String ubicacion) {
-        this.ubicacion = ubicacion;
-    }
-
-    public Integer getCapacidad() {
-        return capacidad;
-    }
-
-    public void setCapacidad(Integer capacidad) {
-        this.capacidad = capacidad;
-    }
-
-    public List<ReservaZona> getReservas() {
-        return reservas;
-    }
-
-    public void setReservas(List<ReservaZona> reservas) {
-        this.reservas = reservas;
+    public void setReservasZona(List<ReservaZona> reservasZona) {
+        this.reservasZona = reservasZona;
     }
 
     @Override
@@ -73,9 +53,7 @@ public class ZonaSocial {
         return "ZonaSocial{" +
                 "idZona=" + idZona +
                 ", nombre='" + nombre + '\'' +
-                ", ubicacion='" + ubicacion + '\'' +
-                ", capacidad=" + capacidad +
-                ", reservas=" + reservas +
+                ", reservasZona=" + reservasZona +
                 '}';
     }
 }

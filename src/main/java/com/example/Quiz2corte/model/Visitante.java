@@ -1,26 +1,30 @@
 package com.example.Quiz2corte.model;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Visitante {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idVisitante;
+    private Long idVisitante;
 
     private String nombre;
     private String cedula;
     private String telefono;
     private String correo;
 
+
     @ManyToOne
-    @JoinColumn(name = "id_propietario")
+    @JsonBackReference
+    @JoinColumn(name = "propietario_id")
     private Propietario propietario;
 
     public Visitante() {
     }
 
-    public Visitante(Integer idVisitante, String nombre, String cedula, String telefono, String correo, Propietario propietario) {
+    public Visitante(Long idVisitante, String nombre, String cedula, String telefono, String correo, Propietario propietario) {
         this.idVisitante = idVisitante;
         this.nombre = nombre;
         this.cedula = cedula;
@@ -29,11 +33,11 @@ public class Visitante {
         this.propietario = propietario;
     }
 
-    public Integer getIdVisitante() {
+    public Long getIdVisitante() {
         return idVisitante;
     }
 
-    public void setIdVisitante(Integer idVisitante) {
+    public void setIdVisitante(Long idVisitante) {
         this.idVisitante = idVisitante;
     }
 
@@ -85,7 +89,7 @@ public class Visitante {
                 ", cedula='" + cedula + '\'' +
                 ", telefono='" + telefono + '\'' +
                 ", correo='" + correo + '\'' +
-                ", propietario=" + propietario +
+                ", propietario=" + (propietario != null ? propietario.getIdPropietario() : null) +
                 '}';
     }
 }
